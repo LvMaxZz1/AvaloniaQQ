@@ -1,0 +1,47 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApplication1.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="350"
+        Width="400" Height="350"
+        x:Class="AvaloniaApplication1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaApplication1">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/> <!-- 设置数据上下文为您的ViewModel -->
+    </Window.DataContext>
+
+    
+     <StackPanel Background="Bisque">
+         <Grid Background="Aquamarine" Height="90" ColumnDefinitions="120,Auto,*,Auto,120" RowDefinitions="45,Auto,Auto">
+             <Panel Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Height="100">
+                 <Grid>
+                     <Image Source="{Binding Logo}" VerticalAlignment="Top"></Image>
+                     <Button 
+                         Name="LoginStartButton"
+                         Background="Green" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="15" Height="15" Margin="30,0"
+                         Click="LoginStartButton_OnClick">
+                     </Button>
+                     <Popup x:Name="Popup" IsVisible="False" HorizontalOffset="70" IsLightDismissEnabled = "True">
+                         <StackPanel>
+                             <ItemsControl ItemsSource="{Binding Items}" >
+                                 <ItemsControl.ItemTemplate>
+                                     <DataTemplate>
+                                         <StackPanel Orientation="Horizontal">
+                                             <Ellipse x:Name="LoginEllipse" Width="10" Height="10" Fill="{Binding Content}" Margin="5"  Tapped = "InputElement_OnTapped"/>
+                                             <TextBlock Text="{Binding Tag}" Margin="5" Tapped="InputElement_OnTappeded"/>
+                                         </StackPanel>
+                                     </DataTemplate>
+                                 </ItemsControl.ItemTemplate>
+                             </ItemsControl>
+                         </StackPanel>
+                     </Popup>
+                 </Grid>
+             </Panel>
+         </Grid>
+     </StackPanel>
+
+</Window>
